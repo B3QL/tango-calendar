@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "tango-calendar"
+version = "0.1.0"
+description = "Calendar app in Django"
+authors = ["Bartłomiej Kurzeja <bartlomiej+tango@kurzeja.it>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+djangorestframework = "^3.12.2"
+django = "^3.1.3"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
