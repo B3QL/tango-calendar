@@ -1,3 +1,13 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from api.serializers import EventSerializer, RoomSerializer
+from api.models import Meeting, Location
 
-# Create your views here.
+
+class EventsView(viewsets.ModelViewSet):
+    serializer_class = EventSerializer
+    queryset = Meeting.objects.all()
+
+
+class RoomsView(viewsets.ModelViewSet):
+    serializer_class = RoomSerializer
+    queryset = Location.objects.all()

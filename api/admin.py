@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from api.models import APIUser
+from api.models import APIUser, Location, Meeting
 
 
 class UserAdmin(BaseUserAdmin):
@@ -13,4 +13,14 @@ class UserAdmin(BaseUserAdmin):
     )
 
 
+class LocationAdmin(admin.ModelAdmin):
+    pass
+
+
+class MeetingAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(APIUser, UserAdmin)
+admin.site.register(Location, LocationAdmin)
+admin.site.register(Meeting, MeetingAdmin)
