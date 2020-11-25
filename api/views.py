@@ -14,10 +14,15 @@ class EventFilter(FilterSet):
 
 class EventsView(viewsets.ModelViewSet):
     serializer_class = EventSerializer
-    queryset = Meeting.objects.all()
     filter_backends = [filters.SearchFilter, DjangoFilterBackend]
     search_fields = ["event_name", "meeting_agenda"]
     filterset_class = EventFilter
+
+    def get_queryset(self):
+        """Restrict view to participants and location owners."""
+        participate_in = Meeting.objects.filter(participant_list=self.request.user)
+        is_location_manager = Meeting.objects.filter(location__manager=self.request.user)
+        return participate_in | is_location_manager
 
 
 class RoomsView(viewsets.ModelViewSet):

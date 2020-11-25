@@ -19,7 +19,7 @@ from rest_framework import routers
 from api.views import EventsView, RoomsView
 
 api_router = routers.SimpleRouter()
-api_router.register('api/events', EventsView)
+api_router.register('api/events', EventsView, basename='event')
 api_router.register('api/rooms', RoomsView)
 
 urlpatterns = [
