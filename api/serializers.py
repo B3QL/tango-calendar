@@ -1,6 +1,7 @@
 from collections import OrderedDict
 from rest_framework import serializers
 from api.models import Meeting, Location, APIUser
+from api.validators import validate_meeting_length
 
 
 class RoomSerializer(serializers.ModelSerializer):
@@ -67,6 +68,7 @@ class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Meeting
         fields = ['id', 'owner', 'event_name', 'meeting_agenda', 'start', 'end', 'participant_list', 'location']
+        validators = [validate_meeting_length]
 
     def save(self, **kwargs):
         """Set owner from current request."""
