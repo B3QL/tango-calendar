@@ -126,5 +126,8 @@ STATIC_URL = '/static/'
 # Django Rest Framework
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
-    'SEARCH_PARAM': "query"
+    'SEARCH_PARAM': "query",
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
 }
