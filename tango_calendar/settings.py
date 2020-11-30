@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'tango_calendar.middleware.TimezoneAwareMiddleware'
 ]
 
 ROOT_URLCONF = 'tango_calendar.urls'
