@@ -5,11 +5,12 @@ from api.models import APIUser, Location, Meeting
 
 class UserAdmin(BaseUserAdmin):
     """Admin model for User class"""
+
     fieldsets = BaseUserAdmin.fieldsets + (
-        (None, {'fields': ('company_id', 'timezone')}),
+        (None, {"fields": ("company_id", "timezone")}),
     )
     add_fieldsets = BaseUserAdmin.add_fieldsets + (
-        (None, {'fields': ('company_id', 'timezone')}),
+        (None, {"fields": ("company_id", "timezone")}),
     )
 
 

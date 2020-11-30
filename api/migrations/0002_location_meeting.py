@@ -9,30 +9,73 @@ import uuid
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('api', '0001_initial'),
+        ("api", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Location',
+            name="Location",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('name', models.TextField()),
-                ('address', models.TextField()),
-                ('manager', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("name", models.TextField()),
+                ("address", models.TextField()),
+                (
+                    "manager",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Meeting',
+            name="Meeting",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('event_name', models.TextField()),
-                ('meeting_agenda', models.TextField()),
-                ('start', models.DateTimeField()),
-                ('end', models.DateTimeField()),
-                ('location', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='api.location')),
-                ('owner', models.ForeignKey(editable=False, on_delete=django.db.models.deletion.PROTECT, related_name='meetings', to=settings.AUTH_USER_MODEL)),
-                ('participant_list', models.ManyToManyField(related_name='participate', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("event_name", models.TextField()),
+                ("meeting_agenda", models.TextField()),
+                ("start", models.DateTimeField()),
+                ("end", models.DateTimeField()),
+                (
+                    "location",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="api.location",
+                    ),
+                ),
+                (
+                    "owner",
+                    models.ForeignKey(
+                        editable=False,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="meetings",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "participant_list",
+                    models.ManyToManyField(
+                        related_name="participate", to=settings.AUTH_USER_MODEL
+                    ),
+                ),
             ],
         ),
     ]

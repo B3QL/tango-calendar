@@ -5,7 +5,7 @@ from api.models import Meeting, Location
 
 
 class EventFilter(FilterSet):
-    day = DateFilter(field_name="start", lookup_expr='exact', label="Day")
+    day = DateFilter(field_name="start", lookup_expr="exact", label="Day")
 
     class Meta:
         model = Meeting
@@ -20,9 +20,15 @@ class EventsView(viewsets.ModelViewSet):
 
     def get_queryset(self):
         """Restrict view to tenants, participants and location owners."""
-        tenant_meetings = Meeting.objects.filter(owner__company_id=self.request.user.company_id)
-        participate_in = tenant_meetings.filter(participant_list__in=[self.request.user])
-        is_location_manager = tenant_meetings.filter(location__manager=self.request.user)
+        tenant_meetings = Meeting.objects.filter(
+            owner__company_id=self.request.user.company_id
+        )
+        participate_in = tenant_meetings.filter(
+            participant_list__in=[self.request.user]
+        )
+        is_location_manager = tenant_meetings.filter(
+            location__manager=self.request.user
+        )
         filtered = participate_in | is_location_manager
         return filtered.distinct()
 

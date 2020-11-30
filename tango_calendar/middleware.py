@@ -3,6 +3,7 @@ from django.utils.timezone import activate, deactivate, get_current_timezone_nam
 
 class TimezoneAwareMiddleware:
     """Activate user timezone"""
+
     def __init__(self, get_response):
         self.get_response = get_response
 
