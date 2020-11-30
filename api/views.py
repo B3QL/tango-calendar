@@ -19,12 +19,16 @@ class EventsView(viewsets.ModelViewSet):
     filterset_class = EventFilter
 
     def get_queryset(self):
-        """Restrict view to participants and location owners."""
-        participate_in = Meeting.objects.filter(participant_list=self.request.user)
-        is_location_manager = Meeting.objects.filter(location__manager=self.request.user)
+        """Restrict view to tenants, participants and location owners."""
+        tenant_meetings = Meeting.objects.filter(owner__company_id=self.request.user.company_id)
+        participate_in = tenant_meetings.filter(participant_list=self.request.user)
+        is_location_manager = tenant_meetings.filter(location__manager=self.request.user)
         return participate_in | is_location_manager
 
 
 class RoomsView(viewsets.ModelViewSet):
     serializer_class = RoomSerializer
-    queryset = Location.objects.all()
+
+    def get_queryset(self):
+        """Restrict view to tenants."""
+        return Location.objects.filter(manager__company_id=self.request.user.company_id)

@@ -20,7 +20,7 @@ from api.views import EventsView, RoomsView
 
 api_router = routers.SimpleRouter()
 api_router.register('api/events', EventsView, basename='event')
-api_router.register('api/rooms', RoomsView)
+api_router.register('api/rooms', RoomsView, basename='room')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
