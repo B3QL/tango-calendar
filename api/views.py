@@ -21,9 +21,10 @@ class EventsView(viewsets.ModelViewSet):
     def get_queryset(self):
         """Restrict view to tenants, participants and location owners."""
         tenant_meetings = Meeting.objects.filter(owner__company_id=self.request.user.company_id)
-        participate_in = tenant_meetings.filter(participant_list=self.request.user)
+        participate_in = tenant_meetings.filter(participant_list__in=[self.request.user])
         is_location_manager = tenant_meetings.filter(location__manager=self.request.user)
-        return participate_in | is_location_manager
+        filtered = participate_in | is_location_manager
+        return filtered.distinct()
 
 
 class RoomsView(viewsets.ModelViewSet):
